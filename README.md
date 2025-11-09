@@ -33,6 +33,7 @@ src/
  └── test/
      └── java/
          └── pt/ests/pa/
+              ├── adt/ArrayPriorityQueueTest.java
               ├── buildings/BuildingTest.java
               ├── elevators/ElevatorTest.java
               ├── floors/FloorTest.java
@@ -104,10 +105,6 @@ onde será possível visualizar o movimento dos elevadores e o estado dos pisos.
 
 ## 👨‍💻 Autores
 
-**Nomes:** Diogo Brito, Diogo Gomes e Rafael Junqueira
+**Nomes:** Diogo Brito, Diogo Gomes e Rafael Junqueira  
 **Unidade Curricular:** Programação Avançada (ESTS — 2025/26)  
 **Fase:** 1 — Implementação do Modelo do Simulador  
-
----
-
-📅 **Data de Entrega:** 10 de novembro de 2025  
