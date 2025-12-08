@@ -1,19 +1,19 @@
 # 🏢 Simulador de Elevadores em Prédio Virtual
-### Programação Avançada 2025/26 — Fase 1 (Modelo do Simulador)
+### Programação Avançada 2025/26 — Fase 2 (Projeto Funcional)
 
 ---
 
 ## 📘 1. Descrição do Projeto
-Este projeto implementa o **modelo base** de um simulador de elevadores, que representa o funcionamento interno de um edifício com pisos, elevadores e passageiros com diferentes prioridades.
+Este projeto implementa um simulador de elevadores funcional, que representa o funcionamento interno de um edifício com pisos, elevadores e passageiros.
 
-A **Fase 1** centra-se na modelação das entidades principais e nas suas interações, sem interface gráfica.  
+A **Fase 2** expande o modelo base, introduzindo a lógica de simulação em tempo real, gestão de estados e interfaces de visualização.
 As principais funcionalidades desta fase incluem:
 
-- Criação de edifícios com número variável de pisos e elevadores;  
-- Geração aleatória de passageiros com diferentes tipos e prioridades;  
-- Simulação do embarque e desembarque de passageiros nos elevadores;  
-- Estruturas de dados genéricas (`Queue`, `PriorityQueue`, `ArrayPriorityQueue`);  
-- Testes unitários para validar o comportamento do modelo.
+- **Dois modos de visualização:** Interface Gráfica (JavaFX) e Modo Consola;
+- **Motor de Simulação:** Controlo temporal e movimentação dos elevadores;
+- **Padrões de Desenho:** Implementação de *Strategy* (algoritmos de decisão), *State* (estados do elevador) e *Factory* (criação de passageiros);
+- **Configuração dinâmica:** Definição de nº de pisos, elevadores e tempos de simulação;
+- **Estatísticas:** Monitorização de tempos de espera e passageiros transportados.
 
 ---
 
@@ -24,38 +24,47 @@ src/
  ├── main/
  │   └── java/
  │       └── pt/ests/pa/
- │            ├── adt/               → Estruturas de dados genéricas (Queue, PriorityQueue)
- │            ├── buildings/         → Classe Building (edifício com pisos e elevadores)
- │            ├── elevators/         → Classe Elevator (gestão de passageiros e destinos)
- │            ├── floors/            → Classe Floor (fila de passageiros)
- │            └── passengers/        → Passenger, PassengerGenerator, PassengerType
+ │            ├── adt/               → Estruturas de dados genéricas
+ │            ├── buildings/         → Lógica do Edifício
+ │            ├── elevators/         → Elevadores e gestão de carga
+ │            ├── floors/            → Pisos e filas de espera
+ │            ├── gui/               → Interface JavaFX (Views e Controllers)
+ │            ├── passengers/        → Passageiros e Fábricas
+ │            ├── simulation/        → Motor de simulação
+ │            ├── state/             → Padrão State (Idle, Moving, DoorsOpen)
+ │            ├── strategy/          → Padrão Strategy (Algoritmos de elevador)
+ │            ├── MainConsole.java   → Ponto de entrada (Modo Consola)
+ │            └── MainJavaFX.java    → Ponto de entrada (Modo Gráfico)
  │
  └── test/
      └── java/
          └── pt/ests/pa/
-              ├── adt/ArrayPriorityQueueTest.java
-              ├── buildings/BuildingTest.java
-              ├── elevators/ElevatorTest.java
-              ├── floors/FloorTest.java
-              └── passengers/
-                   ├── PassengerTest.java
-                   └── PassengerGeneratorTest.java
+            ├── adt/ArrayPriorityQueueTest
+            ├── buildings/BuildingTest
+            ├── elevators/ElevatorTest
+            ├── floors/FloorTest
+            ├── passengers/
+            │   ├── PassengerTest
+            │   ├── PassengerFactoryTest
+            │   └── PassengerGeneratorTest
+            ├── state/ (testes dos estados)
+            ├── strategy/ (testes das estratégias)
+            └── simulation/SimulationTest
 ```
 
 ---
 
 ## 🧱 3. Diagrama UML de Classes
 
-O modelo segue uma arquitetura modular, organizada por pacotes.  
-O diagrama abaixo representa as relações entre as classes principais e as estruturas ADT utilizadas.
+O modelo segue uma arquitetura modular, organizada por pacotes, separando a lógica de negócio (Model) da visualização (View).
 
 ![Diagrama UML](uml_diagrama.png)
 
 > **Resumo das Relações:**
-> - `Building` contém múltiplos `Elevator` e `Floor`;  
-> - `Elevator` e `Floor` gerem listas de `Passenger`;  
-> - `PassengerGenerator` cria novos `Passenger` aleatoriamente;  
-> - `ArrayPriorityQueue` implementa `PriorityQueue`, baseada em `Queue<T>`.
+> - `Simulation` controla o fluxo de tempo e interage com `Building`;
+> - `Elevator` altera o seu comportamento consoante o seu `ElevatorState`;
+> - As estratégias de movimento (`Strategy`) decidem qual elevador atende um pedido;
+> - A `GUI` e a `Console` observam o estado do `Building` para renderizar a informação.
 
 ---
 
@@ -63,8 +72,8 @@ O diagrama abaixo representa as relações entre as classes principais e as estr
 
 ### 🧩 Requisitos:
 - **JDK 17 ou superior**
-- **Maven** (para build e testes)
-- **JUnit 5** (para testes unitários)
+- **Maven** (para build e dependências)
+- **Bibliotecas JavaFX** (geridas pelo Maven)
 
 ### ▶️ Compilar o projeto:
 ```bash
@@ -76,30 +85,78 @@ mvn clean compile
 mvn test
 ```
 
+### 🚀 4.1. Executar no **Modo Consola**
+
+O modo consola corre a simulação passo a passo.
+
+**Compilar:**
+
+```bash
+mvn clean compile
+```
+
+**Executar:**
+
+```bash
+mvn exec:java -Dexec.mainClass="pt.ests.pa.MainConsole"
+```
+
+**Exemplo de execução:**
+Input pedido ao utilizador:
+
+```yaml
+Número de pisos: 8
+Número de elevadores: 3
+Capacidade dos elevadores: 5
+Probabilidade de gerar passageiro (0-1): 0.25
+```
+
+**Comandos disponíveis:**
+
+```text
+ENTER  → avançar 1 step
+p      → avançar 10 steps
+q      → sair
+```
+
+### 🎨 4.2. Executar no Modo Gráfico (JavaFX)
+
+**Compilar com JavaFX:**
+
+```bash
+mvn clean install
+```
+
+**Executar UI:**
+
+```bash
+mvn exec:java -Dexec.mainClass="pt.ests.pa.MainJavaFX"
+```
+
 ---
 
-## 📅 5. Estado da Fase 1
+## 📅 5. Estado da Fase 2
 
 | Tarefa | Descrição | Estado |
 |--------|------------|---------|
-| Modelo de dados | Classes `Building`, `Elevator`, `Floor`, `Passenger`, `PassengerGenerator` | ✅ Concluído |
-| Estruturas de dados (ADT) | `Queue`, `PriorityQueue`, `ArrayPriorityQueue` | ✅ Concluído |
-| Testes unitários | Validação de comportamento das classes principais | ✅ Concluído |
-| Documentação (README + Javadoc) | Organização e explicação da arquitetura | ✅ Concluído |
+| Simulação | Motor de tempo e lógica de movimento | ✅ Concluído |
+| Padrões | Implementação de State, Strategy e Factory | ✅ Concluído |
+| Visualização | Modo Consola funcional | ✅ Concluído |
+| Visualização | Modo JavaFX funcional | ✅ Concluído |
+| Testes | Validação de cenários de simulação | ✅ Concluído |
+| Documentação | Instruções de execução atualizadas | ✅ Concluído |
 
 ---
 
-## 🎨 6. Mockup da Interface (Pré-visualização da Fase 2)
+## 🎨 6. Interface Gráfica (Mockups e Implementação)
 
-O seguinte mockup representa a futura interface gráfica da aplicação (Fase 2),  
-onde será possível visualizar o movimento dos elevadores e o estado dos pisos.
+As imagens abaixo representam a disposição visual implementada na interface JavaFX, permitindo acompanhar o movimento dos elevadores e o estado das filas.
 
 ![Mockup da Interface](mockup1.png)
 ![Mockup da Interface](mockup2.png)
 ![Mockup da Interface](mockup3.png)
 
-> O mockup foi criado para ilustrar a disposição dos elevadores, filas de passageiros e indicadores de estado.  
-> A implementação funcional será desenvolvida na **Fase 2** do projeto.
+> A interface permite configurar os parâmetros iniciais e visualizar estatísticas em tempo real durante a execução da simulação.
 
 ---
 
@@ -107,4 +164,5 @@ onde será possível visualizar o movimento dos elevadores e o estado dos pisos.
 
 **Nomes:** Diogo Brito, Diogo Gomes e Rafael Junqueira  
 **Unidade Curricular:** Programação Avançada (ESTS — 2025/26)  
-**Fase:** 1 — Implementação do Modelo do Simulador  
+
+**Fase:** 2 — Projeto Funcional
