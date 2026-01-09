@@ -1,4 +1,3 @@
-"
 # 🏢 Simulador de Elevadores em Prédio Virtual
 ### Programação Avançada 2025/26 — Fase 3 (Entrega Final)
 
@@ -9,7 +8,7 @@ Este projeto implementa um simulador de elevadores funcional, que representa o f
 
 A **Fase 2** expandiu o modelo base, introduzindo a lógica de simulação em tempo real, gestão de estados e interfaces de visualização.
 
-A **Fase 3 (Entrega Final)** consolida o projeto através da otimização da arquitetura via **Refactoring**, aplicação rigorosa de padrões de desenho e introdução de mecanismos de segurança.
+A **Fase 3 (Entrega Final)** foca-se na consolidação do projeto através da otimização da arquitetura via **Refactoring**, garantindo que o código cumpre os padrões de qualidade e os princípios da programação orientada a objetos lecionados.
 
 As principais funcionalidades incluem:
 - **Dois modos de visualização:** Interface Gráfica (JavaFX) e Modo Consola;
@@ -17,33 +16,22 @@ As principais funcionalidades incluem:
 - **Padrões de Desenho:** Implementação de *Strategy* (algoritmos de decisão), *State* (estados do elevador) e *Factory* (criação de passageiros);
 - **Configuração dinâmica:** Definição de nº de pisos, elevadores e tempos de simulação;
 - **Estatísticas:** Monitorização de tempos de espera e passageiros transportados;
-- **Refactoring & Clean Code (Novo):** Eliminação de *Code Smells* para garantir um código modular e de fácil manutenção;
-- **Funcionalidade Adicional (Novo):** Implementação de um protocolo de evacuação (Modo de Emergência).
+- **Refactoring & Clean Code (Novo):** Aplicação de técnicas para eliminação de *Code Smells* (Long Method, Magic Numbers e Message Chains).
 
 ---
 
 ## 🛠️ 2. Relatório de Refactorings (Fase 3)
-Para elevar a qualidade do design e reduzir o acoplamento, foram aplicadas as seguintes técnicas de refactoring baseadas no catálogo de Martin Fowler:
+De modo a melhorar a estrutura interna do programa sem alterar o seu comportamento, foram aplicadas as seguintes técnicas de refactoring:
 
 | Técnica | Localização | Problema Resolvido (Smell) | Descrição |
 |:--- |:--- |:--- |:--- |
-| **Extract Method** | `Simulation.step()` | **Long Method** | O método original realizava múltiplas tarefas. Foi decomposto em métodos privados especializados: `generatePassengers()`, `processCalls()` e `updateElevators()`. |
-| **Hide Delegate** | `DashboardController` | **Message Chain** | O Controller acedia ao `Building` através da `Simulation`. Criámos métodos delegados na `Simulation` (ex: `getTotalFloors()`) para que a View não dependa da estrutura do Edifício. |
-| **Replace Magic Number**| `Building.java` | **Magic Number** | Valores fixos como a capacidade padrão (6) e o mínimo de pisos (3) foram substituídos pelas constantes `DEFAULT_CAPACITY` e `MIN_FLOORS`. |
-| **Hide Delegate** | `Elevator.java` | **Inappropriate Intimacy** | Criado o método `getPassengerCount()` para que a interface gráfica não tenha de aceder diretamente à lista interna de passageiros do elevador. |
+| **Extract Method** | `Simulation.step()` | **Long Method** | O método `step()` era demasiado extenso. Foi decomposto nos métodos privados `generatePassengers()`, `processCalls()` e `updateElevators()` para melhorar a legibilidade e manutenção. |
+| **Replace Magic Number** | `InitialConfigController` | **Magic Number** | O valor fixo `0.25` da probabilidade foi substituído pela constante simbólica `DEFAULT_PASSENGER_PROBABILITY`, facilitando a configuração global do sistema. |
+| **Hide Delegate** | `Simulation` / `Controller` | **Message Chain** | Evitou-se a cadeia de mensagens `sim.getBuilding().getFloor(i).getWaitingCount()`. Criou-se o método `getFloorWaitingCount(i)` na `Simulation` para encapsular o acesso aos dados do edifício. |
 
 ---
 
-## 🚨 3. Funcionalidade Adicional: Modo de Emergência
-Como requisito da entrega final, foi implementado o **Modo de Fogo/Emergência**:
-- **Ativação:** Botão dedicado na interface gráfica JavaFX.
-- **Lógica de Evacuação:** Ao ser ativado, todos os elevadores cancelam imediatamente os seus destinos atuais.
-- **Protocolo:** Todos os elevadores movem-se para o **Piso 0** e abrem as portas permanentemente.
-- **Segurança:** Novos pedidos de passageiros e chamadas de piso são ignorados enquanto a emergência estiver ativa.
-
----
-
-## 🧩 4. Estrutura do Projeto
+## 🧩 3. Estrutura do Projeto
 
 ```
 src/
@@ -65,29 +53,36 @@ src/
  └── test/
      └── java/
          └── pt/ests/pa/
-            ├── ... (Testes unitários das fases anteriores)
-            └── simulation/SimulationTest → Inclui agora testes de regressão do Refactoring
- │
-javadoc/                             → Documentação HTML completa (Gerada na Fase 3)
+            ├── adt/ArrayPriorityQueueTest
+            ├── buildings/BuildingTest
+            ├── elevators/ElevatorTest
+            ├── floors/FloorTest
+            ├── passengers/
+            │   ├── PassengerTest
+            │   ├── PassengerFactoryTest
+            │   └── PassengerGeneratorTest
+            ├── state/ (testes dos estados)
+            ├── strategy/ (testes das estratégias)
+            └── simulation/SimulationTest
 ```
 
 ---
 
-## 🧱 5. Diagrama UML de Classes
+## 🧱 4. Diagrama UML de Classes
 
 O modelo segue uma arquitetura modular, organizada por pacotes, separando a lógica de negócio (Model) da visualização (View).
 
 ![Diagrama UML](uml_diagrama.png)
 
-> **Resumo das Relações (Fase 3):**
-> - `Simulation` centraliza o controlo e atua como fachada para o `Building` (Hide Delegate);
+> **Resumo das Relações:**
+> - `Simulation` controla o fluxo de tempo e interage com `Building`;
 > - `Elevator` altera o seu comportamento consoante o seu `ElevatorState`;
 > - As estratégias de movimento (`Strategy`) decidem qual elevador atende um pedido;
-> - A `GUI` e a `Console` interagem exclusivamente com a `Simulation`, respeitando o encapsulamento.
+> - A `GUI` e a `Console` interagem com a `Simulation` para renderizar a informação, respeitando agora o encapsulamento (Hide Delegate).
 
 ---
 
-## ⚙️ 6. Execução e Testes
+## ⚙️ 5. Execução e Testes
 
 ### 🧩 Requisitos:
 - **JDK 17 ou superior**
@@ -108,63 +103,36 @@ mvn test
 Para gerar o site com a documentação técnica:
 1. No IntelliJ: Menu `Tools` > `Generate JavaDoc`.
 2. O resultado será guardado na pasta `javadoc/`.
-3. Abrir o ficheiro `index.html` para navegar na documentação.
 
-### 🚀 6.1. Executar no Modo Consola
-
-O modo consola corre a simulação passo a passo.
-
-**Executar:**
-
+### 🚀 5.1. Executar no Modo Consola
 ```bash
 mvn exec:java -Dexec.mainClass="pt.ests.pa.MainConsole"
 ```
 
-**Exemplo de execução:**
-Input pedido ao utilizador:
-
-```yaml
-Número de pisos: 8
-Número de elevadores: 3
-Capacidade dos elevadores: 5
-Probabilidade de gerar passageiro (0-1): 0.25
-```
-
-**Comandos disponíveis:**
-
-```text
-ENTER  → avançar 1 step
-p      → avançar 10 steps
-q      → sair
-```
-
-### 🎨 6.2. Executar no Modo Gráfico (JavaFX)
-
-**Executar UI:**
-
+### 🎨 5.2. Executar no Modo Gráfico (JavaFX)
 ```bash
 mvn exec:java -Dexec.mainClass="pt.ests.pa.MainJavaFX"
 ```
 
 ---
 
-## 📅 7. Tabela de Estado do Projeto
+## 📅 6. Tabela de Estado do Projeto
 
 | Tarefa | Descrição | Estado |
 |--------|------------|---------|
 | Simulação | Motor de tempo e lógica de movimento | ✅ Concluído |
 | Padrões | Implementação de State, Strategy e Factory | ✅ Concluído |
-| Visualização | Modo Consola e JavaFX funcionais | ✅ Concluído |
-| **Refactoring** | Limpeza de Smells e redução de acoplamento | ✅ Concluído |
-| **Emergência** | Funcionalidade adicional de segurança (Fogo) | ✅ Concluído |
-| **JavaDoc** | Documentação completa da API pública | ✅ Concluído |
+| Visualização | Modo Consola funcional | ✅ Concluído |
+| Visualização | Modo JavaFX funcional | ✅ Concluído |
+| **Refactoring** | Limpeza de Smells (Fase 3) | ✅ Concluído |
+| **JavaDoc** | Documentação completa da API (Fase 3) | ✅ Concluído |
 | **Testes** | Validação de regressão pós-refactoring | ✅ Concluído |
 
 ---
 
-## 🎨 8. Interface Gráfica (Mockups e Implementação)
+## 🎨 7. Interface Gráfica (Mockups e Implementação)
 
-As imagens representam a disposição visual final, incluindo o painel de estatísticas, seleção de estratégias e o novo botão de emergência.
+As imagens abaixo representam a disposição visual implementada na interface JavaFX, permitindo acompanhar o movimento dos elevadores e o estado das filas.
 
 ![Mockup da Interface](mockup1.png)
 ![Mockup da Interface](mockup2.png)
@@ -177,5 +145,4 @@ As imagens representam a disposição visual final, incluindo o painel de estat�
 **Nomes:** Diogo Brito, Diogo Gomes e Rafael Junqueira  
 **Unidade Curricular:** Programação Avançada (ESTS — 2025/26)  
 
-**Fase:** 3 — Entrega Final (Janeiro 2026)
-"
+**Fase:** 3 — Entrega Final
