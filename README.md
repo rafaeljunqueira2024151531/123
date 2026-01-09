@@ -6,8 +6,6 @@
 ## 📘 1. Descrição do Projeto
 Este projeto implementa um simulador de elevadores funcional, que representa o funcionamento interno de um edifício com pisos, elevadores e passageiros.
 
-A **Fase 2** expandiu o modelo base, introduzindo a lógica de simulação em tempo real, gestão de estados e interfaces de visualização.
-
 A **Fase 3 (Entrega Final)** foca-se na consolidação do projeto através da otimização da arquitetura via **Refactoring**, garantindo que o código cumpre os padrões de qualidade e os princípios da programação orientada a objetos lecionados.
 
 As principais funcionalidades incluem:
@@ -146,3 +144,4 @@ As imagens abaixo representam a disposição visual implementada na interface Ja
 **Unidade Curricular:** Programação Avançada (ESTS — 2025/26)  
 
 **Fase:** 3 — Entrega Final
+
