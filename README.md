@@ -25,7 +25,7 @@ De modo a melhorar a estrutura interna do programa sem alterar o seu comportamen
 |:--- |:--- |:--- |:--- |
 | **Extract Method** | `Simulation.step()` | **Long Method** | O método `step()` era demasiado extenso. Foi decomposto nos métodos privados `generatePassengers()`, `processCalls()` e `updateElevators()` para melhorar a legibilidade e manutenção. |
 | **Replace Magic Number** | `InitialConfigController` | **Magic Number** | O valor fixo `0.25` da probabilidade foi substituído pela constante simbólica `DEFAULT_PASSENGER_PROBABILITY`, facilitando a configuração global do sistema. |
-| **Hide Delegate** | `Simulation` / `Controller` | **Message Chain** | Evitou-se a cadeia de mensagens `sim.getBuilding().getFloor(i).getWaitingCount()`. Criou-se o método `getFloorWaitingCount(i)` na `Simulation` para encapsular o acesso aos dados do edifício. |
+| **Hide Delegate** | `Simulation` / `DashboardController` | **Message Chain** | Evitou-se a cadeia de mensagens `sim.getBuilding().getFloor(i).getWaitingCount()`. Criou-se o método `getFloorWaitingCount(i)` na `Simulation` para encapsular o acesso aos dados do edifício. |
 
 ---
 
@@ -123,7 +123,7 @@ mvn exec:java -Dexec.mainClass="pt.ests.pa.MainJavaFX"
 | Visualização | Modo Consola funcional | ✅ Concluído |
 | Visualização | Modo JavaFX funcional | ✅ Concluído |
 | **Refactoring** | Limpeza de Smells (Fase 3) | ✅ Concluído |
-| **JavaDoc** | Documentação completa da API (Fase 3) | ✅ Concluído |
+| **JavaDoc** | Documentação completa do projeto (Fase 3) | ✅ Concluído |
 | **Testes** | Validação de regressão pós-refactoring | ✅ Concluído |
 
 ---
@@ -144,4 +144,5 @@ As imagens abaixo representam a disposição visual implementada na interface Ja
 **Unidade Curricular:** Programação Avançada (ESTS — 2025/26)  
 
 **Fase:** 3 — Entrega Final
+
 
