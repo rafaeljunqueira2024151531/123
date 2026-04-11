@@ -23,7 +23,7 @@ Para que o jogo funcione nos dois ambientes, a lógica **não pode** ter `System
     5.  **MotorJogo:** Gere a pontuação, o número de tentativas e o estado atual (venceu/perdeu).
 
 #### 3. Modelo de Classes (UML)
-*(Baseado no exemplo da "Casa Inteligente" dos slides 64 e 105)*
+![Diagrama UML](uml_parcial.png)
 
 *   **Herarquia de Herança:**
     *   `abstract class Carta`
