@@ -1,5 +1,12 @@
 # 📝 Fase 1 – Especificação: Jogo da Memória
 
+### 👥 Grupo `PM.08.2024151531`
+*   👨‍💻 **Rafael Junqueira (Leader)** — 2024151531
+*   👨‍💻 **Diogo Brito** — 2024151350
+
+**Docente de Labratório:** Patrícia Macedo
+**Aula PL:** PL8
+
 ### 🕹️ 1. Descrição do Jogo
 O objetivo do jogo é encontrar todos os pares de símbolos escondidos numa grelha. O diferencial desta versão é a introdução de elementos estratégicos através de cartas com comportamentos dinâmicos.
 
