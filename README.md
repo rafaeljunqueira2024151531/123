@@ -7,6 +7,8 @@
 **Docente de Labratório:** Patrícia Macedo <br>
 **Aula PL:** PL8
 
+---
+
 ### 🕹️ 1. Descrição do Jogo
 O objetivo do jogo é encontrar todos os pares de símbolos escondidos numa grelha. O diferencial desta versão é a introdução de elementos estratégicos através de cartas com comportamentos dinâmicos.
 
