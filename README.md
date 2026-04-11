@@ -4,8 +4,7 @@
 *   👨‍💻 **Rafael Junqueira (Leader)** — 2024151531
 *   👨‍💻 **Diogo Brito** — 2024151350
 
-**Docente de Labratório:** Patrícia Macedo
----
+**Docente de Labratório:** Patrícia Macedo <br>
 **Aula PL:** PL8
 
 ### 🕹️ 1. Descrição do Jogo
