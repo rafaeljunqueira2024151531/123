@@ -49,7 +49,8 @@ O diagrama seguinte representa a arquitetura técnica do sistema:
 
 ---
 
-### 🖥️ 4. Protótipo das Interfaces
+### 🖥️ 4. Protótipo da Interface Gráfica
+A interação é feita através de coordenadas numéricas.
 
 ```text
 Tentativas: 12 | Pares: 1/8
