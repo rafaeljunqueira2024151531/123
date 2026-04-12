@@ -139,4 +139,5 @@ Escolha a linha e coluna (ex: 0 1):
 *   *Estado:* Painel informativo no topo com Labels dinâmicas para tentativas e pares.
 *   *Mensagens:* Uso de janelas de alerta para comunicar o desfecho da partida.
 
-![JavaFX](javafx.jpg)
+![JavaFX](javafx1.jpg)
+![JavaFX](javafx2.jpg)
