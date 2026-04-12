@@ -1,3 +1,63 @@
+<style>
+/* 1. GERAL - Letra mais profissional e compacta */
+body {
+    font-family: "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji";
+    font-size: 13px; /* Um pouco menor para caber melhor */
+    line-height: 1.4;
+    color: #24292e;
+}
+
+/* 2. TÍTULOS - Impede que o título fique sozinho no fim da página */
+h1, h2, h3, h4 {
+    page-break-after: avoid; 
+    break-after: avoid;
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+
+h1 { border-bottom: 2px solid #333; padding-bottom: 5px; font-size: 22px; }
+
+/* 3. TABELA - Estilo "Grelha POO" */
+table {
+    border-collapse: collapse;
+    width: 100%;
+    page-break-inside: avoid; /* Não parte a tabela ao meio */
+    margin-top: 5px;
+}
+
+th, td {
+    border: 1px solid #d0d7de;
+    padding: 8px 12px;
+    vertical-align: top;
+}
+
+th { background-color: #f6f8fa; font-weight: bold; }
+
+/* 4. DIAGRAMAS E IMAGENS - Remove o excesso de branco */
+img {
+    display: block;
+    margin: 10px auto;
+    max-width: 85%; /* Ajusta para não ocupar a página toda */
+    height: auto;
+}
+
+/* 5. LISTAS - Mais juntas */
+li { margin-bottom: 4px; }
+
+/* 6. EMOJIS - Forçar cor */
+* { font-variant-emoji: emoji !important; }
+
+/* 7. BLOCO DE CÓDIGO (Interface Consola) */
+pre {
+    background-color: #f6f8fa;
+    border: 1px solid #ddd;
+    padding: 10px;
+    border-radius: 5px;
+    font-family: monospace;
+    font-size: 12px;
+}
+</style>
+
 # 📝 Fase 1 – Jogo da Memória
 
 ### 👥 Grupo `PM.08.2024151531`
