@@ -121,6 +121,7 @@ O diagrama seguinte detalha a arquitetura do sistema e a organização das class
 ### 🖥️ 4. Protótipo da Interface Gráfica
 A interação na consola é feita através de coordenadas numéricas para selecionar as cartas.
 
+#### 4.1. Interface de Consola
 ```text
 Tentativas: 12 | Pares: 1/8
    0  1  2  3
@@ -131,3 +132,11 @@ Escolha a linha e coluna (ex: 0 1):
 *   `[*]` Carta virada para baixo.
 *   `[A/B/C]` Carta normal revelada.
 *   `[! / ?]` Carta especial revelada e efeito ativado.
+
+#### 4.2. Interface JavaFX
+*   *Visual:* Utilização de um GridPane com botões interativos.
+*   *Feedback:* Ao clicar, o botão revela o *Emoji* correspondente (🍎, 🍌, etc.).
+*   *Estado:* Painel informativo no topo com Labels dinâmicas para tentativas e pares.
+*   *Mensagens:* Uso de janelas de alerta para comunicar o desfecho da partida.
+
+![JavaFX](javafx.jpg)
