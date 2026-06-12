@@ -1,8 +1,8 @@
-# Jogo da Memória
+# 🧠 Jogo da Memória
 
 Projeto desenvolvido no âmbito da unidade curricular de Programação Orientada a Objetos.
 
-## Grupo
+## 👥 Grupo
 
 Grupo: `PM.08.2024151531`
 
@@ -12,13 +12,13 @@ Grupo: `PM.08.2024151531`
 Docente de Laboratório: Patrícia Macedo  
 Aula PL: PL8
 
-## Descrição
+## 🕹️ Descrição
 
 O projeto consiste num jogo da memória desenvolvido em Java com interface gráfica em JavaFX.
 
 O objetivo do jogador é encontrar todos os pares de cartas antes de ficar sem tentativas. O jogo inclui cartas normais, representadas por imagens, e cartas especiais que alteram o estado da partida.
 
-## Regras do Jogo
+## 📜 Regras do Jogo
 
 - O jogador escolhe uma dificuldade no ecrã inicial.
 - O tabuleiro é criado automaticamente de acordo com a dificuldade.
@@ -29,7 +29,7 @@ O objetivo do jogador é encontrar todos os pares de cartas antes de ficar sem t
 - As cartas especiais são ativadas com apenas um clique.
 - O jogo termina quando todos os pares forem encontrados ou quando as tentativas chegarem a zero.
 
-## Dificuldades
+## 🎚️ Dificuldades
 
 | Dificuldade | Tabuleiro | Cartas especiais | Tentativas |
 | :--- | :---: | :---: | :---: |
@@ -37,24 +37,24 @@ O objetivo do jogador é encontrar todos os pares de cartas antes de ficar sem t
 | Médio | 6x6 | 4 | 60 |
 | Difícil | 8x8 | 6 | 110 |
 
-## Cartas Especiais
+## 🃏 Cartas Especiais
 
 | Carta | Efeito |
 | :---: | :--- |
 | `!` | Bónus: adiciona 3 tentativas ao jogador. |
 | `?` | Baralhar: baralha as cartas que ainda não foram fixadas. |
 
-## Conceitos de POO Utilizados
+## 🧩 Conceitos de POO Utilizados
 
-- Abstração: a classe `Card` representa o conceito geral de carta.
-- Herança: `NormalCard` e `SpecialCard` herdam de `Card`.
-- Polimorfismo: o método `reveal` é implementado de forma específica nas subclasses.
-- Encapsulamento: os atributos das classes são privados e acedidos através de métodos.
-- Composição: `Board` contém as cartas do jogo.
-- Associação: `GameEngine` usa um `Board` para aplicar as regras do jogo.
-- Exceções: `InvalidBoardException` e `InvalidMoveException` tratam erros do domínio.
+- 🔹 Abstração: a classe `Card` representa o conceito geral de carta.
+- 🔹 Herança: `NormalCard` e `SpecialCard` herdam de `Card`.
+- 🔹 Polimorfismo: o método `reveal` é implementado de forma específica nas subclasses.
+- 🔹 Encapsulamento: os atributos das classes são privados e acedidos através de métodos.
+- 🔹 Composição: `Board` contém as cartas do jogo.
+- 🔹 Associação: `GameEngine` usa um `Board` para aplicar as regras do jogo.
+- 🔹 Exceções: `InvalidBoardException` e `InvalidMoveException` tratam erros do domínio.
 
-## Estrutura do Projeto
+## 📁 Estrutura do Projeto
 
 ```text
 src/main/java
@@ -89,13 +89,13 @@ Os testes unitários estão em:
 src/test/java
 ```
 
-## Requisitos
+## ✅ Requisitos
 
 - Java 17
 - Maven
 - JavaFX
 
-## Como Executar
+## ▶️ Como Executar
 
 Na raiz do projeto, executar:
 
@@ -105,7 +105,7 @@ mvn javafx:run
 
 Também é possível executar pelo IntelliJ IDEA, correndo a classe `Main`.
 
-## Como Correr os Testes
+## 🧪 Como Correr os Testes
 
 Na raiz do projeto, executar:
 
@@ -122,7 +122,7 @@ Os testes incidem sobre o modelo do domínio, incluindo:
 - motor do jogo;
 - jogadas inválidas.
 
-## Interface Gráfica
+## 🖥️ Interface Gráfica
 
 A interface gráfica foi implementada com JavaFX.
 
@@ -136,11 +136,11 @@ O controlo da aplicação é feito por:
 - `StartController`: controla o ecrã inicial.
 - `GameController`: controla o jogo e liga a interface ao modelo.
 
-## Condições de Vitória e Derrota
+## 🏆 Condições de Vitória e Derrota
 
-- Vitória: todos os pares normais são encontrados.
-- Derrota: as tentativas chegam a zero antes de todos os pares serem encontrados.
+- 🟢 Vitória: todos os pares normais são encontrados.
+- 🔴 Derrota: as tentativas chegam a zero antes de todos os pares serem encontrados.
 
-## Observações
+## 📝 Observações
 
 A lógica do jogo está separada da interface gráfica. Isto permite testar o modelo sem depender da JavaFX, cumprindo a separação entre modelo, interface e controlo da aplicação.
