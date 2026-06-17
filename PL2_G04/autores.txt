@@ -1,0 +1,4 @@
+Turma:	Grupo:	Número:	Nome:
+PL2	G04	2024151350	Diogo Brito
+PL2	G04	2024148451	Diogo Gomes
+PL2	G04	2024151531	Rafael Junqueira
